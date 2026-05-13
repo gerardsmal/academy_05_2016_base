@@ -1,12 +1,14 @@
-package com.betacom;
+package com.betacom.process;
 
+import com.betacom.interfaces.GeneralProcess;
 import com.betacom.objects.BMW;
 import com.betacom.objects.Fiat500;
 
-public class MainAbstract {
+public class AbstractManager implements GeneralProcess{
 
-	public static void main(String[] args) {
-		System.out.println("Begin MainAbstract");
+	@Override
+	public boolean execute() throws Exception {
+		System.out.println("Begin AbstractManager");
 
 		Fiat500 fiat = new Fiat500();
 		fiat.setColor("Nero");
@@ -28,7 +30,7 @@ public class MainAbstract {
 		bmw.frena();
 		
 		System.out.println("Model:" + bmw.getModel() + " colore:" + bmw.getColor() + " bmw:" + fiat.getMaxSpeed());
-		
+		return false;
 	}
 
 }

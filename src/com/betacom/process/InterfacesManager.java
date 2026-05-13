@@ -1,18 +1,21 @@
-package com.betacom;
+package com.betacom.process;
 
 import java.util.ArrayList;
 
 import com.betacom.interfaces.Animale;
+import com.betacom.interfaces.GeneralProcess;
 import com.betacom.interfaces.Preda;
 import com.betacom.interfaces.Predatore;
 import com.betacom.objects.Gazella;
 import com.betacom.objects.Leone;
 import com.betacom.objects.Pesce;
 
-public class mainInterfaces {
+public class InterfacesManager implements GeneralProcess{
 
-	public static void main(String[] args) {
-		System.out.println("Begin mainInterfaces ");
+	
+	@Override
+	public boolean execute() throws Exception {
+		System.out.println("Begin InterfacesManager ");
 		
 		ArrayList<Animale> lA = new ArrayList<Animale>();
 		lA.add(new Gazella());
@@ -22,9 +25,12 @@ public class mainInterfaces {
 		for (Animale it:lA) {
 			identification(it);
 		}
+
+		
+		return false;
 	}
-	
-	private static void identification(Animale o) {
+
+	private  void identification(Animale o) {
 		if (o instanceof Preda) {
 			Preda obj = (Preda)o;
 			obj.sonoUnaPreda();
@@ -35,5 +41,6 @@ public class mainInterfaces {
 		}
 
 	}
+
 
 }

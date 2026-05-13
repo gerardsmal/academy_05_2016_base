@@ -1,11 +1,13 @@
-package com.betacom;
+package com.betacom.process;
 
+import com.betacom.interfaces.GeneralProcess;
 import com.betacom.objects.Impiegato;
 
-public class MainEredit {
+public class EreditManager implements GeneralProcess{
 
-	public static void main(String[] args) {
-		System.out.println("Begin MainEredit");
+	@Override
+	public boolean execute() throws Exception {
+		System.out.println("Begin EreditManager");
 
 		Impiegato imp = new Impiegato("Paolo", "Rossi", false, 1500);
 		
@@ -18,7 +20,7 @@ public class MainEredit {
 		imp.setSesso(true);
 		
 		System.out.println(imp);
-		
+		return false;
 	}
 
 }

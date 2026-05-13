@@ -1,16 +1,18 @@
-package com.betacom;
+package com.betacom.process;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.betacom.interfaces.GeneralProcess;
 import com.betacom.objects.User;
 import com.betacom.utils.PromozioneAutomatica;
 
 
 
 
-public class MainBase {
+public class BaseManager  implements GeneralProcess{
 
-	public static void main(String[] args) {
+	@Override
+	public boolean execute() throws Exception {
 		System.out.println("Begin mainBase");
 		/*
 		 * primitives
@@ -190,7 +192,9 @@ public class MainBase {
 		}
 		
 		User aa = new User();
+		return false;
 		
 	}
+
 
 }
