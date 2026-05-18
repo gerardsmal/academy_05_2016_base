@@ -10,7 +10,9 @@ import com.betacom.process.AbstractManager;
 import com.betacom.process.BaseManager;
 import com.betacom.process.ListManager;
 import com.betacom.process.MapManager;
+import com.betacom.process.SequentialManager;
 import com.betacom.process.SingleTonManager;
+import com.betacom.process.StreamManager;
 import com.betacom.process.DateManager;
 import com.betacom.process.EnumManager;
 import com.betacom.process.EreditManager;
@@ -23,7 +25,7 @@ import com.betacom.utils.Utilities;
 public class MainProcess {
 	public static void main(String[] args) {
 		
-		String selected = "generics";
+		String selected = "stream";
 		
 		System.out.println("MainProcess is ready to execute " + selected + "  at " + Utilities.dateToString(LocalDateTime.now()) +"*********");
 	
@@ -40,6 +42,8 @@ public class MainProcess {
 		pr.put("map", new MapManager());
 		pr.put("singleton", new SingleTonManager());
 		pr.put("generics", new GenericsManager());
+		pr.put("sequential", new SequentialManager());
+		pr.put("stream", new StreamManager());		
 		
 		if (pr.containsKey(selected)) {
 			try {
