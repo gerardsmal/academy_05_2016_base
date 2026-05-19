@@ -7,6 +7,7 @@ import java.util.Map;
 import com.betacom.exception.AcademyException;
 import com.betacom.interfaces.GeneralProcess;
 import com.betacom.process.AbstractManager;
+import com.betacom.process.AnonimaManager;
 import com.betacom.process.BaseManager;
 import com.betacom.process.ListManager;
 import com.betacom.process.MapManager;
@@ -19,43 +20,48 @@ import com.betacom.process.EreditManager;
 import com.betacom.process.ExceptionManager;
 import com.betacom.process.GenericsManager;
 import com.betacom.process.InterfacesManager;
+import com.betacom.process.JsonManager;
 import com.betacom.process.StringManager;
 import com.betacom.utils.Utilities;
 
 public class MainProcess {
 	public static void main(String[] args) {
 		
-		String selected = "stream";
+		String selected = "json";
 		
 		System.out.println("MainProcess is ready to execute " + selected + "  at " + Utilities.dateToString(LocalDateTime.now()) +"*********");
 	
-		Map<String, GeneralProcess> pr = new HashMap<String, GeneralProcess>();
-		pr.put("base", new BaseManager());
-		pr.put("abstract", new AbstractManager());
-		pr.put("eredit", new EreditManager());
-		pr.put("interface", new InterfacesManager());
-		pr.put("string", new StringManager());
-		pr.put("exception", new ExceptionManager());
-		pr.put("enum", new EnumManager());
-		pr.put("date", new DateManager());
-		pr.put("list", new ListManager());
-		pr.put("map", new MapManager());
-		pr.put("singleton", new SingleTonManager());
-		pr.put("generics", new GenericsManager());
-		pr.put("sequential", new SequentialManager());
-		pr.put("stream", new StreamManager());		
+		Map<String, GeneralProcess> pr = Map.ofEntries(
+				Map.entry("base", new BaseManager()),
+				Map.entry("abstract", new AbstractManager()),
+				Map.entry("eredit", new EreditManager()),
+				Map.entry("interface", new InterfacesManager()),
+				Map.entry("string", new StringManager()),
+				Map.entry("exception", new ExceptionManager()),
+				Map.entry("enum", new EnumManager()),
+				Map.entry("date", new DateManager()),
+				Map.entry("list", new ListManager()),
+				Map.entry("map", new MapManager()),
+				Map.entry("singleton", new SingleTonManager()),
+				Map.entry("generics", new GenericsManager()),
+				Map.entry("sequential", new SequentialManager()),
+				Map.entry("stream", new StreamManager()),
+				Map.entry("anonima", new AnonimaManager()),
+				Map.entry("json", new JsonManager())
+		);
 		
-		if (pr.containsKey(selected)) {
-			try {
-				GeneralProcess ex =pr.get(selected);
-				ex.execute();
-				System.out.println("** process terminato normalmente *** ");
-			} catch (Exception e) {
-				System.err.println("errore durante l'esecuzione:" + e.getMessage());
-			}
-			
-		} else
-			throw new AcademyException("process non previsto");
+		GeneralProcess ex = pr.get(selected);
+
+		if (ex == null) {
+		    throw new AcademyException("process non previsto");
+		}		
+		
+		try {
+			ex.execute();
+			System.out.println("** process terminato normalmente *** ");
+		} catch (Exception e) {
+			System.err.println("errore durante l'esecuzione:" + e.getMessage());
+		}			
 		
 
 	}
