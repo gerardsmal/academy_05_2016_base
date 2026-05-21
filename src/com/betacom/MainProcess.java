@@ -13,6 +13,7 @@ import com.betacom.process.BuilderManager;
 import com.betacom.process.ListManager;
 import com.betacom.process.LombokManager;
 import com.betacom.process.MapManager;
+import com.betacom.process.ReflectionManager;
 import com.betacom.process.SequentialManager;
 import com.betacom.process.SingleTonManager;
 import com.betacom.process.StreamManager;
@@ -27,12 +28,15 @@ import com.betacom.process.JsonManager;
 import com.betacom.process.StringManager;
 import com.betacom.utils.Utilities;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class MainProcess {
 	public static void main(String[] args) {
 		
-		String selected = "lombok";
+		String selected = "reflection";
 		
-		System.out.println("MainProcess is ready to execute " + selected + "  at " + Utilities.dateToString(LocalDateTime.now()) +"*********");
+		log.info("MainProcess is ready to execute {} at {} *********",selected, Utilities.dateToString(LocalDateTime.now()));
 	
 		Map<String, GeneralProcess> pr = Map.ofEntries(
 				Map.entry("base", new BaseManager()),
@@ -53,7 +57,8 @@ public class MainProcess {
 				Map.entry("json", new JsonManager()),
 				Map.entry("inner", new InnerManager()),
 				Map.entry("builder", new BuilderManager()),
-				Map.entry("lombok", new LombokManager())
+				Map.entry("lombok", new LombokManager()),
+				Map.entry("reflection", new ReflectionManager())
 		);
 		
 		GeneralProcess ex = pr.get(selected);
@@ -64,9 +69,10 @@ public class MainProcess {
 		
 		try {
 			ex.execute();
-			System.out.println("** process terminato normalmente *** ");
+			log.info("** process terminato normalmente *** ");
 		} catch (Exception e) {
-			System.err.println("errore durante l'esecuzione:" + e.getMessage());
+			e.printStackTrace();
+			log.error("errore durante l'esecuzione: {}", e.getMessage());
 		}			
 		
 
