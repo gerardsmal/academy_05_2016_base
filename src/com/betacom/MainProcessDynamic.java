@@ -15,18 +15,16 @@ public class MainProcessDynamic {
 	
 	public static void main(String[] args) {
 
-		String selected = "list";
+		String selected = "optional";
 		
 		log.info("MainProcess is ready to execute {} at {} *********",selected, Utilities.dateToString(LocalDateTime.now()));
 		try {
 			GeneralProcess ex = (GeneralProcess) loadService(selected);
 			executeOperation(ex);
+			log.info("MainProcess is ended at {} *********", Utilities.dateToString(LocalDateTime.now()));
 		} catch (Exception e) {
 			log.error("process andato in error: {}", e.getMessage());
 		}
-		
-		
-		
 	}
 	
 	private static Object loadService(String name)  throws Exception{
@@ -54,6 +52,7 @@ public class MainProcessDynamic {
 		} catch (IllegalArgumentException e) {
 			throw new Exception("Errore IllegalArgument" + e.getMessage());
 		} catch (InvocationTargetException e) {            // retrieve error from invoke method (AcademyException)
+			e.getCause().printStackTrace();
 			throw new Exception(e.getCause().getMessage());
 		} catch (NoSuchMethodException e) {
 			throw new Exception("metodo 'execute' non trovato" );

@@ -9,7 +9,7 @@ import java.util.Locale;
 import com.betacom.exception.AcademyException;
 
 public class Utilities {
-	private final static String PATTERN_DATE = "d/M/yyyy HH:mm:ss";
+	private final static String PATTERN_DATE = "d/M/yyyy HH:mm:ss:SSSS";
 	/*
 	 * transform date to format string
 	 */
