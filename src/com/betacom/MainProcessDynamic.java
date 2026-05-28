@@ -15,7 +15,7 @@ public class MainProcessDynamic {
 	
 	public static void main(String[] args) {
 
-		String selected = "optional";
+		String selected = "sql";
 		
 		log.info("MainProcess is ready to execute {} at {} *********",selected, Utilities.dateToString(LocalDateTime.now()));
 		try {

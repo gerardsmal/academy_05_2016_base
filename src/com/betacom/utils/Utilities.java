@@ -1,5 +1,6 @@
 package com.betacom.utils;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,6 +38,11 @@ public class Utilities {
 			throw new AcademyException("Formato della data invalido:" + myDate + " formato previsto:" + pattern);
 		}
 		return r;
+	}
+	
+	public static LocalDate dateToLocalDate(Object value) {
+		if ((value) == null) return null;
+		return ((Date)value).toLocalDate();
 	}
 	
 	public static String buildClassName(String par) {
