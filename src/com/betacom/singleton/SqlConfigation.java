@@ -60,6 +60,20 @@ public class SqlConfigation {
 		return conn;
 	}
 	
+	/*
+	 * close connection
+	 */
+	public void closeConnection() throws AcademyException {
+		try {
+			if (conn != null)
+				conn.close();
+			conn = null;
+			
+		} catch (Exception e) {
+			throw new AcademyException(e.getMessage());
+		}
+	}
+	
 	private Connection openConnection() throws AcademyException {
 		try {
 			Class.forName(getProperty("driver"));
@@ -73,6 +87,47 @@ public class SqlConfigation {
 		}
 	}
 	
+	public void setAutocommit() throws AcademyException {
+		try {
+			if (conn == null)
+				throw new AcademyException("non abbiamo connessione attive");
+			conn.setAutoCommit(true);   // autocommit is setted			
+		} catch (Exception e) {
+			throw new AcademyException(e.getMessage());
+		}		
+	}
+	
+	public void setTransaction() throws AcademyException {
+		try {
+			if (conn == null)
+				throw new AcademyException("non abbiamo connessione attive");
+			conn.setAutoCommit(false);   // autocommit is setted			
+		} catch (Exception e) {
+			throw new AcademyException(e.getMessage());
+		}		
+	}
+	
+	public void commit() {
+		try {
+			if (conn == null)
+				throw new AcademyException("non abbiamo connessione attive");
+			conn.commit(); 			
+		} catch (Exception e) {
+			throw new AcademyException(e.getMessage());
+		}		
+		
+	}
+
+	public void rollback() {
+		try {
+			if (conn == null)
+				throw new AcademyException("non abbiamo connessione attive");
+			conn.rollback();  			
+		} catch (Exception e) {
+			throw new AcademyException(e.getMessage());
+		}		
+		
+	}
 	
 	
 }

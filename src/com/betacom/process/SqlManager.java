@@ -2,6 +2,7 @@ package com.betacom.process;
 
 import com.betacom.interfaces.GeneralProcess;
 import com.betacom.services.ServiceQuery;
+import com.betacom.services.ServiceUpdate;
 import com.betacom.singleton.SqlConfigation;
 
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,9 @@ public class SqlManager implements GeneralProcess{
 		try {
 			SqlConfigation.getIntance().getConnection();
 			log.debug("Connect database ok");
-			new ServiceQuery().executeQuery();
+			// new ServiceQuery().executeQuery();
+			new ServiceUpdate().executeUpdate();
+			SqlConfigation.getIntance().closeConnection();
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
