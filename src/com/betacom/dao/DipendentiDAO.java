@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.betacom.exception.AcademyException;
+import com.betacom.objects.Cliente;
 import com.betacom.objects.Dipendenti;
 import com.betacom.singleton.SqlConfigation;
 import com.betacom.utils.GestioneSQL;
@@ -13,6 +15,35 @@ import com.betacom.utils.Utilities;
 
 public class DipendentiDAO {
 	private GestioneSQL db = new GestioneSQL();
+
+	public int insert(String queryName, Dipendenti dip) throws Exception{
+		
+		Object[] parms = new Object[] {
+				dip.getNome(),
+				dip.getCognome(),
+				dip.getDataAssunzione(),
+				dip.getTelefono(),
+				dip.getMansione(),
+				dip.getStipendio(),
+				dip.getIdUfficio(),
+				dip.getCode()
+		};
+		
+		String query = SqlConfigation.getIntance().getQuery(queryName);
+		
+		return db.save(query, parms, true);
+	}
+
+	public int delete(Integer id) throws Exception{
+		if (id == null)
+			throw new AcademyException("Id non caricata");
+		
+		Object[] params = new Object[] {id};
+		
+		String query = "delete from dipendenti where id_dipendente = ?";
+		return db.save(query, params, false);
+	}
+
 	
 	public List<Dipendenti> findAll() throws Exception{	
 		List<Map<String,Object>> r = db.list(SqlConfigation.getIntance().getQuery("query.dipendenti"));
